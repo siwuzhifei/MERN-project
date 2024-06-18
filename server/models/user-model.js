@@ -40,9 +40,13 @@ userSchema.methods.isInstructor = function() {
     return this.role === "instructor";
 };
 userSchema.methods.comparePassword = async function(password,cb) {
+    let result;
     // this refers to the current document in mongoDB
-        let result = await bcrypt.compare(password, this.password);
+    try{
+        result = await bcrypt.compare(password, this.password);
         return cb(null, result);
+    } catch (err) {
+        return cb(err, result);
     };
 
 // mongoose middleware
