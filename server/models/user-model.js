@@ -48,6 +48,7 @@ userSchema.methods.comparePassword = async function(password,cb) {
     } catch (err) {
         return cb(err, result);
     };
+}
 
 // mongoose middleware
 // if usr is new, or change the password, hash the password
@@ -60,6 +61,7 @@ userSchema.pre("save", async function(next) {
     }
     next();
 });
+
 
 
 module.exports = mongoose.model("User", userSchema);
