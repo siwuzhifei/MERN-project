@@ -11,6 +11,7 @@ const RegisterComponent = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [role, setRole] = useState("");
+  let [message, setMessage] = useState("")
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -28,18 +29,20 @@ const RegisterComponent = () => {
     setRole(e.target.value);
   };
   const handleRegister = () => {
-    authService.register(username, email, password, role).then((response) => {
+    authService.register(username, email, password, role)
+    .then((response) => {
       window.alert("Register successfully! You will be redirected to the login page.");
       navigate("/login");
-      console.log(response.data);
-    }).catch((error) => {
-      console.log(error);
+    })
+    .catch((error) => {
+      setMessage(error.response.data);
     });
   };
 
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
       <div>
+        {message && <div className="alert alert-danger">{message}</div>}
         <div>
           <label htmlFor="username">用戶名稱:</label>
           <input
