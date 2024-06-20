@@ -1,12 +1,15 @@
-const ProfileComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+import { useState, useEffect } from "react";
+import authService from "../services/auth.service";
+
+
+const ProfileComponent = ({currentUser, setCurrentUser}) => {
 
   return (
-    <div style={{ padding: "3rem" }}>
-      {!currentUser && <div>在獲取您的個人資料之前，您必須先登錄。</div>}
+      <div style={{ padding: "3rem" }}>
+      {!currentUser && <div>在获取您的个人资料之前，您必须先登陆。</div>}
       {currentUser && (
         <div>
-          <h2>以下是您的個人檔案：</h2>
+          <h2>以下是您的个人档案：</h2>
 
           <table className="table">
             <tbody>
@@ -22,7 +25,7 @@ const ProfileComponent = (props) => {
               </tr>
               <tr>
                 <td>
-                  <strong>您註冊的電子信箱: {currentUser.user.email}</strong>
+                  <strong>您注册的邮箱: {currentUser.user.email}</strong>
                 </td>
               </tr>
               <tr>
